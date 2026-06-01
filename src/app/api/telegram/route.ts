@@ -7,8 +7,13 @@ export async function POST(request: Request) {
     // ==========================================
     // PENTING: ISI TOKEN DAN CHAT ID DI BAWAH INI
     // ==========================================
-    const BOT_TOKEN = "8784375862:AAEznuNI2aPCiefZB4YEV_KpmmheVaV3pQs";
-    const CHAT_ID = "8406125410";
+    const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+    const CHAT_ID = process.env.TELEGRAM_CHAT_ID || "8406125410";
+    
+    if (!BOT_TOKEN) {
+      console.error("TELEGRAM_BOT_TOKEN belum di-set di Environment Variables");
+      return NextResponse.json({ success: false, error: "Server Configuration Error" }, { status: 500 });
+    }
     
 
     
