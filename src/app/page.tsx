@@ -136,22 +136,22 @@ export default function Home() {
   // Mobile-Optimized Animation Variants
   const slideUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 60, damping: 14 } }
+    visible: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 60, damping: 14 } }
   };
 
   const slideRight = {
     hidden: { opacity: 0, x: -40, rotate: -3 },
-    visible: { opacity: 1, x: 0, rotate: 0, transition: { type: "spring", stiffness: 50, damping: 12 } }
+    visible: { opacity: 1, x: 0, rotate: 0, transition: { type: "spring" as const, stiffness: 50, damping: 12 } }
   };
 
   const slideLeft = {
     hidden: { opacity: 0, x: 40, rotate: 3 },
-    visible: { opacity: 1, x: 0, rotate: 0, transition: { type: "spring", stiffness: 50, damping: 12 } }
+    visible: { opacity: 1, x: 0, rotate: 0, transition: { type: "spring" as const, stiffness: 50, damping: 12 } }
   };
 
   const scaleUp = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 50, damping: 14 } }
+    visible: { opacity: 1, scale: 1, transition: { type: "spring" as const, stiffness: 50, damping: 14 } }
   };
 
   const staggerContainer = {
