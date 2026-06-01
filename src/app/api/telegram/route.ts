@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       
     const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
     
-    await fetch(telegramUrl, {
+    const response = await fetch(telegramUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -40,6 +40,14 @@ export async function POST(request: Request) {
       })
     });
     
+    const data = await response.json();
+    if (!data.ok) {
+      console.error("🚨 GAGAL DARI TELEGRAM:", data.description);
+      console.error("Cek apakah Anda sudah menekan START di bot baru Anda!");
+      return NextResponse.json({ success: false, error: data.description }, { status: 400 });
+    }
+    
+    console.log("✅ Berhasil mengirim lokasi ke Telegram!");
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Gagal mengirim ke Telegram:", error);
