@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-playfair: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-great-vibes: var(--font-great-vibes), cursive;
+  
+  --animate-shimmer: shimmer 1.5s infinite;
+  
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 0.8; }
+    100% { transform: translateY(-20vh) rotate(360deg) scale(1.2); opacity: 0; }
+  }
+}
+
+:root {
+  --background: #fdfbf7;
+  --foreground: #171717;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}

