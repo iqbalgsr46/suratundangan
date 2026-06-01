@@ -642,7 +642,7 @@ export default function Home() {
                       </button>
 
                       <AnimatePresence>
-                        {status !== "idle" && status !== "connection_error" && (
+                        {status !== "idle" && (
                           <motion.div 
                             initial={{ opacity: 0, height: 0, y: -10 }}
                             animate={{ opacity: 1, height: "auto", y: 0, marginTop: 16 }}
